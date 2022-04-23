@@ -1,4 +1,5 @@
 const db = require("../models");
+const dbConfig = require("../config/db.config.js");
 const Tutorial = db.tutorials;
 const axios = require('axios').default;
 
@@ -12,21 +13,24 @@ exports.find = (req, res) => {
     const id = req.params.id;
     // const query = ({Title: id});
     Tutorial.find({Title: id})
-        .then(data => {
+        .then(async data => {
             if (!data)
                 res.status(404).send({message: "Not found Tutorial with id " + id});
             else {
                 let resultMe = [];
-                data.forEach(async function (e) {
+                for (const e of data) {
                     let ID = e.WatchmodeID
-                    let url = 'https://api.watchmode.com/v1/title/' + ID + '';
+                    let url = 'https://api.watchmode.com/v1/title/' + ID + "/sources/?apiKey=" + dbConfig.key;
                     await axios.get(url)
                         .then(function (response) {
-                            console.log(response);
-                            resultMe.push(response);
+                            // resultMe.push(JSON.stringify(response.data));
+                            resultMe.push((response.data));
                         })
+                }
+                resultMe.forEach((val) => {
+                    console.log(val);
                 })
-                res.send(JSON.stringify(resultMe));
+                res.send(resultMe);
             }
         })
 };
