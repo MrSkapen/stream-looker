@@ -35,4 +35,21 @@ exports.find = (req, res) => {
         })
 };
 
+exports.suggestions = (req, res) => {
 
+    let query = {};
+
+    if (req.params.searchPhrase !== undefined) {
+        query = {
+            Title: new RegExp(req.params.searchPhrase, 'i')
+        };
+    }
+
+    Tutorial.find(query, function (err, data) {
+        if (err) {
+            res.status(404).send({ error: true, message: "Error fetching data" });
+        } else {
+            res.status(200).send({ result: data });
+        }
+    });
+};
