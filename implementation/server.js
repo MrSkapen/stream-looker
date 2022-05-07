@@ -26,9 +26,9 @@ db.mongoose
 
 const tutorials = require("./controllers/controller.js");
 
-app.get("/eee", tutorials.hello);
 app.get("/:id", tutorials.find);
 app.get("/suggestions/:searchPhrase", tutorials.suggestions);
+app.get("/details/:watchmodeId", tutorials.details);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

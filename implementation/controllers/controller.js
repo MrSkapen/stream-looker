@@ -1,13 +1,8 @@
 const db = require("../models");
 const dbConfig = require("../config/db.config.js");
+const e = require("express");
 const Tutorial = db.tutorials;
 const axios = require('axios').default;
-
-exports.hello = (req, res) => {
-    res.status(200).send({
-        message: "SIEMA"
-    });
-};
 
 exports.find = (req, res) => {
     const id = req.params.id;
@@ -52,4 +47,22 @@ exports.suggestions = (req, res) => {
             res.status(200).send({ result: data });
         }
     });
+};
+
+exports.details = (req, res) => {
+
+    const watchmodeId = req.params.watchmodeId;
+    let url = 'https://api.watchmode.com/v1/title/' + watchmodeId + "/details/?apiKey=" + dbConfig.key;
+
+    const getDetails = async () => {
+        try {
+            return await axios.get(url)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    getDetails().then( result => {
+        res.status(200).send(result.data);
+    })
 };
