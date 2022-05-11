@@ -3,7 +3,7 @@ button {
     background-color: transparent;
 }
 
-.movie-element {
+.movie-element-extended {
     width: 100%;
     background-color: white;
     display: flex;
@@ -13,28 +13,28 @@ button {
     font-size: 16px;
 }
 
-.movie-element img {
+.movie-element-extended img {
     height: 120px;
     width: 100px;
     padding: 8px;
 }
 
-.movie-element-data {
+.movie-element-extended-data {
     padding: 16px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.movie-element-extended-title {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     flex: 1;
-    gap: 8px;
-}
-
-.movie-element-title {
-    font-weight: bold;
-    font-size: large;
 }
 
 
-.movie-element-ratings {
+.movie-element-extended-ratings {
     display: flex;
     flex-direction: column;
     align-self: center;
@@ -51,7 +51,7 @@ button {
     justify-content: flex-end;
 }
 
-.movie-element-rating-box {
+.movie-element-extended-rating-box {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,4 +60,9 @@ button {
     border: 3px solid brown;
     border-radius: 4px;
     font-size: 24px;
+}
+
+.movie-element-extended-title-text {
+    font-weight: bold;
+    font-size: large;
 }

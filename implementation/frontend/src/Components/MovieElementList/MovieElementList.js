@@ -8,10 +8,7 @@ const MovieElementList = (props) => {
         return movies.map(movie => {
             return (
                 <MovieElement
-                    criticsRating={movie.critic_score}
-                    userRating={movie.user_rating}
                     key={movie.id}
-                    networks={movie.network_names}
                     onClick={() => onClick(movie.id)}
                     poster={movie.poster}
                     title={movie.title}

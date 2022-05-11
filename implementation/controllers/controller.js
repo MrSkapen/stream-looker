@@ -67,10 +67,12 @@ exports.details = (req, res) => {
 
         let promises = [];
 
-        result.data.similar_titles.forEach(similarTitleId => {
-            let similarTitleUrl = 'https://api.watchmode.com/v1/title/' + similarTitleId + '/details/?apiKey=' + dbConfig.key;
-            promises.push(getDetails(similarTitleUrl));
-        })
+        if (result.data && result.data.similar_titles) {
+            result.data.similar_titles.forEach(similarTitleId => {
+                let similarTitleUrl = 'https://api.watchmode.com/v1/title/' + similarTitleId + '/details/?apiKey=' + dbConfig.key;
+                promises.push(getDetails(similarTitleUrl));
+            })
+        }
 
         Promise.allSettled(promises).then(settledPromises => {
             let similarTitles = [];
