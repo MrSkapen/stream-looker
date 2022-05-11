@@ -1,6 +1,7 @@
 const db = require("../models");
 const dbConfig = require("../config/db.config.js");
 const e = require("express");
+let {details} = require("./controller");
 const Tutorial = db.tutorials;
 const axios = require('axios').default;
 
@@ -52,9 +53,9 @@ exports.suggestions = (req, res) => {
 exports.details = (req, res) => {
 
     const watchmodeId = req.params.watchmodeId;
-    let url = 'https://api.watchmode.com/v1/title/' + watchmodeId + "/details/?apiKey=" + dbConfig.key;
+    let watchmodeUrl = 'https://api.watchmode.com/v1/title/' + watchmodeId + '/details/?apiKey=' + dbConfig.key;
 
-    const getDetails = async () => {
+    const getDetails = async (url) => {
         try {
             return await axios.get(url)
         } catch (error) {
@@ -62,7 +63,24 @@ exports.details = (req, res) => {
         }
     }
 
-    getDetails().then( result => {
-        res.status(200).send(result.data);
+    getDetails(watchmodeUrl).then( result => {
+
+        let promises = [];
+
+        result.data.similar_titles.forEach(similarTitleId => {
+            let similarTitleUrl = 'https://api.watchmode.com/v1/title/' + similarTitleId + '/details/?apiKey=' + dbConfig.key;
+            promises.push(getDetails(similarTitleUrl));
+        })
+
+        Promise.allSettled(promises).then(settledPromises => {
+            let similarTitles = [];
+
+            settledPromises.forEach(settledPromise => {
+                similarTitles.push(settledPromise.value.data);
+            })
+
+            result.data.similar_titles = similarTitles;
+            res.status(200).send(result.data);
+        })
     })
 };
