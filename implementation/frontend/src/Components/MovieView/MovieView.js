@@ -1,20 +1,9 @@
 import './MovieView.css';
-import {useEffect} from "react";
 import MovieElementExtended from "../MovieElementExtended/MovieElementExtended";
 
 const MovieView = (props) => {
 
     const {movie, onClick} = props;
-
-    const getYTLink = () => {
-        fetch("https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=gBrmnB5aOSI&format=json")
-            .then(data => data.json())
-            .then(res => console.log(res))
-    }
-
-    useEffect(() => {
-        getYTLink();
-    }, [])
 
     const renderSimilarTitles = () => {
         return movie.similar_titles && movie.similar_titles.slice(0,5).map(similarTitle => {

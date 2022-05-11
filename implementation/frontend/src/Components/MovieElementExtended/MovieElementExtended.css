@@ -24,6 +24,7 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: start;
 }
 
 .movie-element-extended-title {
