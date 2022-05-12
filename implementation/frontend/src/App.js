@@ -59,7 +59,7 @@ const App = () => {
             {/*    Some logo*/}
             {/*</div>*/}
             <div className="website-middle">
-                <span>Welcome, let us find a movie for you!</span>
+                <span className="entry-text">Welcome, let us find a movie for you!</span>
                 <SearchBox
                     onChange={handleSearchInput}
                     placeholder="Enter movie title..."

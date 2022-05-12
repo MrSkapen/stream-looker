@@ -1,8 +1,8 @@
 .movie-view{
     display: flex;
     flex-direction: column;
-    padding: 16px;
-    margin-top: 16px;
+    padding: 1rem;
+    margin-top: 1rem;
     background-color: white;
     border-radius: 4px;
     height: 60%;
@@ -14,20 +14,20 @@
 }
 
 .movie-view-poster img {
-    height: 400px;
-    width: 250px;
+    height: 32rem;
+    width: 20rem;
 }
 
 .movie-view-title {
     font-family: "Arial Black", serif;
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 .movie-view-data {
     display: flex;
     flex-direction: column;
-    padding: 16px;
-    gap: 16px;
+    padding: 1rem;
+    gap: 1rem;
 }
 
 .movie-element-ratings {
@@ -35,14 +35,14 @@
     flex-direction: row;
     align-self: center;
     margin-left: auto;
-    padding: 16px;
-    gap: 32px;
+    padding: 1rem;
+    gap: 2rem;
 }
 
 .movie-rating {
     display: flex;
     flex-direction: row;
-    gap: 8px;
+    gap: 0.5rem;
     align-items: center;
     justify-content: flex-end;
 }
@@ -51,21 +51,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 32px;
-    height: 32px;
+    width: 2rem;
+    height: 2rem;
     border: 3px solid brown;
     border-radius: 4px;
-    font-size: 24px;
+    font-size: 1.5rem;
+    padding: 0.5rem;
 }
 
 .network-list {
-    padding: 16px 0;
+    padding: 1rem 0;
     font-size: large;
 }
 
 .similar-titles {
     display: flex;
-    padding-top: 16px;
+    padding-top: 1rem;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
 }
