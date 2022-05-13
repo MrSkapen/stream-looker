@@ -1,4 +1,4 @@
 module.exports = {
-  url: "",
-  key: ""
+  url: process.env.DATABASE_URI,
+  key: process.env.APIKEY
 };
