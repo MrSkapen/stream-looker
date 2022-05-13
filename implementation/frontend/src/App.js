@@ -14,7 +14,7 @@ const App = () => {
     const [selectedMovie, selectMovie] = useState(null);
 
     const getResultsFromRequest = async (phrase) => {
-        const res = await axios.get(`http://localhost:8088/suggestions/${phrase}`);
+        const res = await axios.get(`http://localhost:8080/suggestions/${phrase}`);
         const {data: {result}} = res;
         const mappedResults = result.map(movie => {
             return {
@@ -28,7 +28,7 @@ const App = () => {
     }
 
     const getMovieFromRequest = async (id) => {
-        const res = await axios.get(`http://localhost:8088/details/${id}`);
+        const res = await axios.get(`http://localhost:8080/details/${id}`);
         const {data} = res;
         return data
     }
