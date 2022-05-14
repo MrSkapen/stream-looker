@@ -67,22 +67,33 @@ exports.details = (req, res) => {
 
         let promises = [];
 
-        if (result.data && result.data.similar_titles) {
+        if (result && result.data && result.data.similar_titles) {
             result.data.similar_titles.forEach(similarTitleId => {
                 let similarTitleUrl = 'https://api.watchmode.com/v1/title/' + similarTitleId + '/details/?apiKey=' + dbConfig.key;
                 promises.push(getDetails(similarTitleUrl));
             })
+        } else if (result && result.data) {
+            result.data.similar_titles = [];
+            res.status(200).send(result.data);
+        } else {
+            res.status(200).send({ error: true, message: "Error requesting data from API" })
         }
 
-        Promise.allSettled(promises).then(settledPromises => {
-            let similarTitles = [];
+        if (promises) {
+            Promise.allSettled(promises).then(settledPromises => {
+                let similarTitles = [];
 
-            settledPromises.forEach(settledPromise => {
-                similarTitles.push(settledPromise.value.data);
+                settledPromises.forEach(settledPromise => {
+                    if (settledPromise && settledPromise.value && settledPromise.data) {
+                        similarTitles.push(settledPromise.value.data);
+                    }
+                })
+
+                result.data.similar_titles = similarTitles;
+                res.status(200).send(result.data);
             })
-
-            result.data.similar_titles = similarTitles;
+        } else {
             res.status(200).send(result.data);
-        })
+        }
     })
 };
