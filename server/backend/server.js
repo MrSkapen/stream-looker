@@ -1,14 +1,11 @@
 const express = require("express");
-const cors = require("cors");
 const app = express();
+const path = require('path');
+const PORT = process.env.PORT || 5000;
 
-const corsOptions = {
-    origin: "*"
-};
-
-app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '..' ,'build')));
 
 const db = require("./models");
 db.mongoose
@@ -29,8 +26,10 @@ const tutorials = require("./controllers/controller.js");
 app.get("/:id", tutorials.find);
 app.get("/suggestions/:searchPhrase", tutorials.suggestions);
 app.get("/details/:watchmodeId", tutorials.details);
+app.get('/*', (req, res) => {
+	res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
-const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
