@@ -72,28 +72,29 @@ exports.details = (req, res) => {
                 let similarTitleUrl = 'https://api.watchmode.com/v1/title/' + similarTitleId + '/details/?apiKey=' + dbConfig.key;
                 promises.push(getDetails(similarTitleUrl));
             })
+
+            if (promises.length) {
+                Promise.allSettled(promises).then(settledPromises => {
+                    let similarTitles = [];
+
+                    settledPromises.forEach(settledPromise => {
+                        if (settledPromise && settledPromise.value && settledPromise.data) {
+                            similarTitles.push(settledPromise.value.data);
+                        }
+                    })
+
+                    result.data.similar_titles = similarTitles;
+                    res.status(200).send(result.data);
+                })
+            } else {
+                result.data.similar_titles = [];
+                res.status(200).send(result.data);
+            }
         } else if (result && result.data) {
             result.data.similar_titles = [];
             res.status(200).send(result.data);
         } else {
-            res.status(200).send({ error: true, message: "Error requesting data from API" })
-        }
-
-        if (promises) {
-            Promise.allSettled(promises).then(settledPromises => {
-                let similarTitles = [];
-
-                settledPromises.forEach(settledPromise => {
-                    if (settledPromise && settledPromise.value && settledPromise.data) {
-                        similarTitles.push(settledPromise.value.data);
-                    }
-                })
-
-                result.data.similar_titles = similarTitles;
-                res.status(200).send(result.data);
-            })
-        } else {
-            res.status(200).send(result.data);
+            res.status(200).send({error: true, message: "Error requesting data from API"})
         }
     })
 };
