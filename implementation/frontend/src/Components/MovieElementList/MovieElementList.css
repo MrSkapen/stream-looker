@@ -1,9 +1,0 @@
-.movie-element-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 40px;
-    overflow-y: auto;
-    height: 65%;
-    padding-right: 32px;
-}

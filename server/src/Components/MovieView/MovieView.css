@@ -1,0 +1,72 @@
+.movie-view{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    margin-top: 1rem;
+    background-color: white;
+    border-radius: 4px;
+    height: 60%;
+    overflow-y: auto;
+}
+.movie-view-top {
+    display: flex;
+    flex-direction: row;
+}
+
+.movie-view-poster img {
+    height: 32rem;
+    width: 20rem;
+}
+
+.movie-view-title {
+    font-family: "Arial Black", serif;
+    font-size: 1.5rem;
+}
+
+.movie-view-data {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.movie-element-ratings {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    margin-left: auto;
+    padding: 1rem;
+    gap: 2rem;
+}
+
+.movie-rating {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.movie-element-rating-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid brown;
+    border-radius: 4px;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+}
+
+.network-list {
+    padding: 1rem 0;
+    font-size: large;
+}
+
+.similar-titles {
+    display: flex;
+    padding-top: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+}
