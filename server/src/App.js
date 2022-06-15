@@ -30,6 +30,10 @@ const App = () => {
     const getMovieFromRequest = async (id) => {
         const res = await axios.get(`/details/${id}`);
         const {data} = res;
+        if (data.error){
+            alert('Sorry, error from database')
+            return;
+        }
         return data
     }
 
@@ -53,6 +57,10 @@ const App = () => {
         getMovieFromRequest(id).then(movie => selectMovie(movie))
     }
 
+    const backToSearch = () => {
+        selectMovie(null);
+    }
+
     return (
         <div className="App">
             {/*<div>*/}
@@ -60,11 +68,14 @@ const App = () => {
             {/*</div>*/}
             <div className="website-middle">
                 <span className="entry-text">Welcome, let us find a movie for you!</span>
-                <SearchBox
-                    onChange={handleSearchInput}
-                    placeholder="Enter movie title..."
-                    value={textFromSearch}
-                />
+                <div className="search-line">
+                    <SearchBox
+                        onChange={handleSearchInput}
+                        placeholder="Enter movie title..."
+                        value={textFromSearch}
+                    />
+                    {selectedMovie && <button className="back-to-search" onClick={backToSearch}>Back to search</button>}
+                </div>
                 {
                     selectedMovie && <MovieView movie={selectedMovie} onClick={handleMovieClick}/>
                 }
