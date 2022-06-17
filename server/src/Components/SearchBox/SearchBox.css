@@ -4,5 +4,6 @@
 
 .search-box-input input{
     padding: 1rem;
+    border-radius: 50px;
     width: 90%;
 }

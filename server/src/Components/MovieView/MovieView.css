@@ -7,6 +7,7 @@
     border-radius: 4px;
     height: 60%;
     overflow-y: auto;
+    color:#2B2D42
 }
 .movie-view-top {
     display: flex;
@@ -28,6 +29,7 @@
     flex-direction: column;
     padding: 1rem;
     gap: 1rem;
+    color:#2B2D42
 }
 
 .movie-element-ratings {
@@ -53,7 +55,8 @@
     align-items: center;
     width: 2rem;
     height: 2rem;
-    border: 3px solid brown;
+    border: 3px solid #D90429;
+    color: #2B2D42;
     border-radius: 4px;
     font-size: 1.5rem;
     padding: 0.5rem;
@@ -62,6 +65,7 @@
 .network-list {
     padding: 1rem 0;
     font-size: large;
+    color:#2B2D42
 }
 
 .similar-titles {
@@ -69,4 +73,5 @@
     padding-top: 1rem;
     flex-direction: column;
     gap: 0.5rem;
+    color:#2B2D42
 }

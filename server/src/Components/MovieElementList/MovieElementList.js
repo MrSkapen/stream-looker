@@ -17,6 +17,7 @@ const MovieElementList = (props) => {
                 />
             )
         })
+
     }
 
     return (
