@@ -4,9 +4,12 @@ import MovieElementExtended from "../MovieElementExtended/MovieElementExtended";
 const MovieView = (props) => {
 
     const {movie, onClick} = props;
-
+    console.log(movie)
     const renderSimilarTitles = () => {
-        return movie.similar_titles && movie.similar_titles.slice(0,5).map(similarTitle => {
+        return <>
+            {/*{movie !== undefined && <span>Similar titles: </span>}*/}
+            {movie.similar_titles.length != 0 ? (<span>Similar titles: </span>):(<span></span>)}
+            {movie.similar_titles && movie.similar_titles.slice(0, 5).map(similarTitle => {
             return (<MovieElementExtended
                 criticsRating={similarTitle.critic_score}
                 userRating={similarTitle.user_rating}
@@ -19,7 +22,8 @@ const MovieView = (props) => {
                 id={similarTitle.id}
                 onClick={onClick}
             />)
-        })
+        })}
+            </>
     }
     return (
         <div className="movie-view">
@@ -73,7 +77,6 @@ const MovieView = (props) => {
                 </div>
             }
             <div className="similar-titles">
-                <span>Similar titles: </span>
                 {renderSimilarTitles()}
             </div>
         </div>

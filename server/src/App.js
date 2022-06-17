@@ -12,8 +12,10 @@ const App = () => {
     const [movies, setMovies] = useState([]);
     const [titleForRequest, setTitleForRequest] = useState('');
     const [selectedMovie, selectMovie] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const getResultsFromRequest = async (phrase) => {
+        setLoading(true);
         const res = await axios.get(`/suggestions/${phrase}`);
         const {data: {result}} = res;
         const mappedResults = result.map(movie => {
@@ -25,6 +27,7 @@ const App = () => {
             }
         })
         setMovies(mappedResults)
+        setLoading(false);
     }
 
     const getMovieFromRequest = async (id) => {
@@ -44,6 +47,7 @@ const App = () => {
     const handleSearchInput = (text) => {
         setTextFromSearch(text);
         selectMovie(null);
+
         if (text.length > 2) {
             setTitleForRequest(text)
             debouncedRequest(text)
@@ -80,12 +84,18 @@ const App = () => {
                     selectedMovie && <MovieView movie={selectedMovie} onClick={handleMovieClick}/>
                 }
                 {
-                    titleForRequest.length > 2 && !selectedMovie &&
+                loading && <div className="spinner_wrapper"><Spinner/></div>
+                }
+
+                {
+                    !loading && titleForRequest.length > 2 && !selectedMovie &&
                     <MovieElementList movieTitle={titleForRequest} movies={movies} onClick={handleMovieClick}/>
                 }
             </div>
         </div>
     );
 }
+
+const Spinner = () => <div className="loader"></div>;
 
 export default App;
