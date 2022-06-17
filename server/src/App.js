@@ -14,7 +14,7 @@ const App = () => {
     const [selectedMovie, selectMovie] = useState(null);
 
     const getResultsFromRequest = async (phrase) => {
-        const res = await axios.get(`http://localhost:5000/suggestions/${phrase}`);
+        const res = await axios.get(`/suggestions/${phrase}`);
         const {data: {result}} = res;
         const mappedResults = result.map(movie => {
             return {
@@ -28,7 +28,7 @@ const App = () => {
     }
 
     const getMovieFromRequest = async (id) => {
-        const res = await axios.get(`http://localhost:5000/details/${id}`);
+        const res = await axios.get(`/details/${id}`);
         const {data} = res;
         if (data.error){
             alert('Sorry, error from database')
